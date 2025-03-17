@@ -1,5 +1,4 @@
 const User = require("../models/User");
-const jwt = require("jsonwebtoken");
 const mailSender = require("../utils/mailSender");
 const bcrypt = require("bcrypt");
 
@@ -68,9 +67,18 @@ exports.resetPassword = async (req, res) => {
     if (!password || !confirmPassword || !token) {
       return res.status().json({
         success: false,
-        message: "Password and conform Password does not match",
+        message: "All fields are required",
       });
     }
+
+    //password match with confirm password
+    if (password !== confirmPassword) {
+      return res.status(400).json({
+        success: false,
+        message: "password and confirm password is not matching",
+      });
+    }
+
     //get userdetails from db using token
     const userDetails = await User.findOne({ token: token });
 
@@ -92,17 +100,21 @@ exports.resetPassword = async (req, res) => {
 
     //hash the new password
     const hashedPassword = await bcrypt.hash(password, 10);
-    await User.findOneAndUpdate({ token: token }, { password: hashedPassword },{new::true});
+    await User.findOneAndUpdate(
+      { token: token },
+      { password: hashedPassword },
+      { new: true }
+    );
     //return response
     return res.status(200).json({
-        success:true,
-        message:"Password Reset Successful"
-    })
+      success: true,
+      message: "Password Reset Successful",
+    });
   } catch (error) {
-    console.log("Error Occured in the update reset Password",error.message)
+    console.log("Error Occured in the update reset Password", error.message);
     return res.status(400).json({
-        success:false,
-        message:`Error Occured in updateResetPassword ${error.message}`
-    }) 
+      success: false,
+      message: `Error Occured in updateResetPassword ${error.message}`,
+    });
   }
 };

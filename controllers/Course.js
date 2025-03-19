@@ -126,6 +126,12 @@ exports.showAllCoureses = async (req, res) => {
     )
       .populate()
       .exec();
+
+    return res.status(200).json({
+      success: true,
+      message: "All courses are fetched successfully",
+      allCourse,
+    });
   } catch (error) {
     console.log("Error Occured in the showAllCourses", error.message);
     return res.status(500).json({

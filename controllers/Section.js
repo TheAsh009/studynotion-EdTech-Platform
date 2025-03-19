@@ -22,7 +22,7 @@ exports.createSection = async (req, res) => {
       { _id: courseId },
       {
         $push: {
-          courseContent: newSection,
+          courseContent: newSection._id,
         },
       },
       {

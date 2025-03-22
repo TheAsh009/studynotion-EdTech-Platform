@@ -2,7 +2,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { capturePayment, verifySignature } = require("../controllers/Payments");
+const { capturePayment, verifySignature } = require("../controllers/Payment");
 const {
   auth,
   isInstructor,

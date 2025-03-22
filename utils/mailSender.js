@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+require("dotenv").config();
 
 const mailSender = async (email, title, body) => {
   try {
@@ -6,7 +7,7 @@ const mailSender = async (email, title, body) => {
       host: process.env.MAIL_HOST,
       auth: {
         user: process.env.MAIL_USER,
-        pass: process.env.NAIL_PASS,
+        pass: process.env.MAIL_PASS,
       },
     });
 

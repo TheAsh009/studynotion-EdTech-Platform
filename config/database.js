@@ -5,7 +5,7 @@ const dbConnection = () => {
   mongoose
     .connect(process.env.MONGO_URL)
     .then(() => {
-      console.log("Databse Connection Successful");
+      console.log("DB Connection Successful");
     })
     .catch((error) => {
       console.log("DB Connection Failed", error.message);

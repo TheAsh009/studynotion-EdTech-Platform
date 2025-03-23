@@ -1,4 +1,4 @@
-const cloudinary = require("cloudinary");
+const cloudinary = require("cloudinary").v2;
 
 exports.uploadImageToCloudinary = async (file, folder, height, quality) => {
   const options = { folder };
@@ -10,6 +10,5 @@ exports.uploadImageToCloudinary = async (file, folder, height, quality) => {
   }
   options.resource_type = "auto";
 
-  //this return a serure URL for the media
   return await cloudinary.uploader.upload(file.tempFilePath, options);
 };

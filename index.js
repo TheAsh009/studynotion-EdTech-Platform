@@ -40,7 +40,6 @@ app.use(
     tempFileDir: "/tmp",
   })
 );
-
 //cloudinary Connection
 cloudinaryConnect();
 

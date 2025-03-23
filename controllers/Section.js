@@ -84,8 +84,8 @@ exports.deleteSection = async (req, res) => {
       message: "Section deleted",
     });
     await Course.findByIdAndUpdate(
-      { courseId },
-      { $delete: { courseContent: sectionId } }
+      { _id: courseId },
+      { $pull: { courseContent: sectionId } }
     );
   } catch (error) {
     console.error("Error deleting section:", error);
